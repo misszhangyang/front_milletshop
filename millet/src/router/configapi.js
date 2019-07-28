@@ -14,17 +14,16 @@ export const queryOPListByLineForPage = function (asi, params) {
 }
 
 //查找Line是否包含OP
-export const hasOPByLine = function (asi, params) {
-     debugger
-     $.ajax({
-        type:'get',
-        url:'http://127.0.0.1:8083/milletshop/queryByPageSize',
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success:function(res){
-            if(res != null){
-              return  _this.toPhoneListPage(res);
-            }
-        }
-    })
-}
+// export const hasOPByLine = function (asi, params) {
+//      $.ajax({
+//         type:'get',
+//         url:'http://127.0.0.1:8083/milletshop/queryByPageSize',
+//         contentType: "application/json; charset=utf-8",
+//         dataType: "json",
+//         success:function(res){
+//             if(res != null){
+//               return  _this.toPhoneListPage(res);
+//             }
+//         }
+//     })
+// }

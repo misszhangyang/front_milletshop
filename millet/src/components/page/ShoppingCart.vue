@@ -1,5 +1,4 @@
 <template>
-    <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -49,9 +48,20 @@
 						</div>
 						<div class="sub_content fl">{{item.totalCount}}</div>
 						<div class="sub_content fl"><a href="">×</a></div>
-						<div class="clear"></div>
-				</div> 
+						<!-- <div class="clear"></div> -->
+				        </div> 
 			</div>
+			<el-col :span="24"  class="page pagehelper">
+			    <el-pagination 
+					@size-change="handleSizeChange"
+					@current-change="handleCurrentChange"
+					:current-page="currentPage"
+					:page-sizes="pageSizesList"
+					:page-size="pageSize"
+					layout="total, sizes, prev, pager, next, jumper"
+					:total="totalCount">
+			    </el-pagination>
+           </el-col>
 			<div class="jiesuandan mt20 center">
 				<div class="tishi fl ml20">
 					<ul>
@@ -68,10 +78,13 @@
 				</div>
 				<div class="clear"></div>
 			</div>
+     
+		  <div class="main center mb20">
+				<div class="clear"></div>
+			</div>
 		</div>
 	<!-- footer -->
 	<footer class="center">
-			
 			<div class="mt20">小米商城|MIUI|米聊|多看书城|小米路由器|视频电话|小米天猫店|小米淘宝直营店|小米网盟|小米移动|隐私政策|Select Region</div>
 			<div>©mi.com 京ICP证110507号 京ICP备10046444号 京公网安备11010802020134号 京网文[2014]0059-0009号</div> 
 			<div>违法和不良信息举报电话：185-0130-1238，本网站所列数据，除特殊说明，所有数据均出自我司实验室测试</div>
@@ -88,53 +101,52 @@ export default {
     name:'ShoppingCart',
     data (){
       return {
-	    	quanxuanNumber:0,
+	    quanxuanNumber:0,
         username:'',
         login: '登录',
         password:'',
-				shoppingCarPhone:{
-          phoneName:'',
-					phonePrice:'',
-					count:'',
-					totalCount:''
-				},
-				shoppingCarList:[],
+		shoppingCarPhone:{
+			phoneName:'',
+			phonePrice:'',
+			count:'',
+			totalCount:''
+	    },
+		shoppingCarList:[],
       }
     },
-		created(){
+	created(){
 			//在页面加载时读取数据库中的购物车信息
-		  this.getPhoneListBeforePageLoading();
-		},
+		    this.getPhoneListBeforePageLoading();
+	},
     methods:{
 	   //点击全选按钮触发的事件
-      quanxuan:function(){
+            quanxuan:function(){
 				if(this.quanxuanNumber == 1){
 					$(".allselect").prop("checked",false);
 					this.quanxuanNumber = 0
 				}else{
-							$(".allselect").prop("checked","checked");
-							this.quanxuanNumber = 1
-						} 
+					$(".allselect").prop("checked","checked");
+					this.quanxuanNumber = 1
+					 } 
 				},
 				getPhoneListBeforePageLoading:function(){
 					var isRepeatPhoneName = false;
 					var _this = this;
 					_this.shoppingCarPhone = _this.$route.query.ShoppingCarPhone;
-		     	_this.shoppingCarList.push(_this.shoppingCarPhone);
+		     	    _this.shoppingCarList.push(_this.shoppingCarPhone);
 					 //商品入库，名称重复等情况交给后台去判断
-		    	_this.GLOBAL.getDataFromBack("addPhoneToShoppingCar",_this.shoppingCarPhone).then(res => {
+		    	    _this.GLOBAL.getDataFromBack("addPhoneToShoppingCar",_this.shoppingCarPhone).then(res => {
 					//从数据库中查询当前的值是否已经有重复的商品，如果有，则将数量加一，没有，则入库
   					if(res != null){
-							debugger
-								_this.shoppingCarList = res;
-						}
-		      });
-				}
+						  _this.shoppingCarList = res;
+					}
+		        });
+			}
 		},
     mounted:function(){
 			var _this = this;
 			_this.username = _this.GLOBAL.getUserName;
-      _this.login = _this.username == null ? '登录' : '';
+			_this.login = _this.username == null ? '登录' : '';
     }
 }
 </script>

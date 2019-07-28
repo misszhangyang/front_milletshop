@@ -98,7 +98,7 @@
 									<div class="xuangou_left fl">
 										<a @click="godetails('小米5c')" style="cursor:pointer">
 											<div class="img fl"><img src="@/assets/image/5c_80.png" alt=""></div>
-											<span v-model="phoneName" value="小米手机5c" class="fl">小米手机5c</span>
+											<span v-model="phoneName" value="小米5c" class="fl">小米5c</span>
 											<div class="clear"></div>
 										</a>
 									</div>
@@ -1544,16 +1544,15 @@ export default {
 	methods:{
 		//手机详情页
 		godetails:function(phoneName){
-			debugger
 			var phone = {
-          phoneName : phoneName,
+                phoneName : phoneName,
 			};
-		 this.GLOBAL.getDataFromBack("getPhoneByName",phone).then(res => {
+		    this.GLOBAL.getDataFromBack("getPhoneByName",phone).then(res => {
 					res.username = this.username;
 		 			this.$router.push({
 				path:'/Xiaomi6',query:{res}
-		 })
-		 })
+		     })
+		    })
 		},
 
 		//获取手机列表
@@ -1575,7 +1574,6 @@ export default {
 
 //当所有span元素且class为f1点击时发生
   $("span>.f1").click(function (){
-		debugger
 		alert("nihao");
 	})
 </script>

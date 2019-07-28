@@ -176,7 +176,8 @@ export default {
             }).catch(function(err){
                 _this.$message.error(_this.$t(err));
             })
-        },
+		},
+		//模糊查询，如果有手机名，则按手机名搜索，如果没有，则直接以手机id进行搜索
 		queryByFuzzySearch:function(){
 			var _this = this;
 			var fuzzySearch = {
@@ -198,14 +199,12 @@ export default {
     
 	   },
 	    handleSizeChange: function(val){
-			debugger
             this.page.pageSize = val;
             this.search();
         },
 		  //翻页,当没有搜索条件时则直接按顺序查找
         handleCurrentChange: function(pageSize){
 			var _this = this;
-			debugger
 			//当有查询条件时，则翻页是为一次查询出来的结果按顺序查找
 			if(!_this.queryphonename || (!_this.minId && !_this.maxId)){
                    if(_this.totalCount.length > 10){

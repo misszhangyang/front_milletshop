@@ -1,6 +1,6 @@
 <template>
     <body>
-		<form  method="post" @submit.prevent="register">
+		<form method="post" @submit.prevent="register">
 		<div class="regist">
 			<div class="regist_center">
 				<div class="regist_top">
@@ -22,9 +22,8 @@
 					</div>
 				</div>
 				<div class="regist_submit">
-					<input class="submit" type="submit"  name="submit" value="立即注册" >
+					<input class="submit" type="submit" name="submit" value="立即注册" >
 				</div>
-				
 			</div>
 		</div>
 		</form>
@@ -47,15 +46,15 @@ export default {
     methods:{
       register:function(){
           var _this = this;
-          if(!_this.confirmPassword)
-           alert("密码输入不一致，请重新输入");
-           return;
+          if(!_this.confirmPassword()){
+             alert("密码输入不一致，请重新输入");
+             return;
+          }
           var user = {
             username:_this.username,
             password:_this.password,
             phoneNumber:_this.phonenumber
           }
-
           this.GLOBAL.getDataFromBack("user/register",user).then(res => {
                   if(res > 0){
                       alert('注册成功，请登录');

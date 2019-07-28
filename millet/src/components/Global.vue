@@ -50,7 +50,7 @@ function getDataFromBack(url,param){
     return $.ajax({
        type:'post',
        data: JSON.stringify(param),
-       url: "http://127.0.0.1:8083/milletshop/" + url,
+       url: "http://47.101.133.16:8082/milletshop/" + url,
 			 contentType: "application/json; charset=utf-8",
 			 dataType: "json",
 			 success:function(res){
